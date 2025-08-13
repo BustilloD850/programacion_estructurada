@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 11-08-2025 a las 02:41:00
+-- Tiempo de generación: 13-08-2025 a las 06:12:17
 -- Versión del servidor: 10.4.32-MariaDB
--- Versión de PHP: 8.2.12
+-- Versión de PHP: 8.1.25
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -20,6 +20,8 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `bd_dulceria`
 --
+CREATE DATABASE IF NOT EXISTS `bd_dulceria` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `bd_dulceria`;
 
 -- --------------------------------------------------------
 
@@ -37,6 +39,14 @@ CREATE TABLE `producto` (
   `fecha_creacion` datetime DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Volcado de datos para la tabla `producto`
+--
+
+INSERT INTO `producto` (`id_producto`, `codigo`, `nombre`, `descripcion`, `precio`, `stock`, `fecha_creacion`) VALUES
+(1, '0001', 'paleta', 'paleta con sabor a fresa', 5.00, 31, '2025-08-12 20:45:41'),
+(2, '0002', 'chicles', 'goma de mascar con diferentes sabores', 2.00, 45, '2025-08-12 20:49:57');
+
 -- --------------------------------------------------------
 
 --
@@ -51,6 +61,13 @@ CREATE TABLE `recarga` (
   `fecha` datetime DEFAULT current_timestamp(),
   `comentario` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `recarga`
+--
+
+INSERT INTO `recarga` (`id_recarga`, `id_producto`, `id_usuario`, `cantidad`, `fecha`, `comentario`) VALUES
+(1, 1, 1, 18, '2025-08-12 20:58:23', NULL);
 
 -- --------------------------------------------------------
 
@@ -67,6 +84,13 @@ CREATE TABLE `usuario` (
   `fecha_registro` datetime DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Volcado de datos para la tabla `usuario`
+--
+
+INSERT INTO `usuario` (`id`, `nombre`, `apellidos`, `email`, `password`, `fecha_registro`) VALUES
+(1, 'CARMEN', 'SOSA', 'carmen@gmail.com', '03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4', '2025-08-12 20:40:31');
+
 -- --------------------------------------------------------
 
 --
@@ -81,6 +105,13 @@ CREATE TABLE `venta` (
   `total` decimal(10,2) NOT NULL,
   `fecha` datetime DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `venta`
+--
+
+INSERT INTO `venta` (`id_venta`, `id_usuario`, `id_producto`, `cantidad`, `total`, `fecha`) VALUES
+(1, 1, 1, 2, 10.00, '2025-08-12 20:57:04');
 
 --
 -- Índices para tablas volcadas
@@ -124,25 +155,25 @@ ALTER TABLE `venta`
 -- AUTO_INCREMENT de la tabla `producto`
 --
 ALTER TABLE `producto`
-  MODIFY `id_producto` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_producto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `recarga`
 --
 ALTER TABLE `recarga`
-  MODIFY `id_recarga` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_recarga` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `venta`
 --
 ALTER TABLE `venta`
-  MODIFY `id_venta` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_venta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Restricciones para tablas volcadas
